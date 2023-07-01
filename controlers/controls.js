@@ -1,7 +1,7 @@
 //it is a logic page
 
 // 1. GET /api/home
-const getHome = (req, res) => {
+const getHome =(req, res) => {
       res.status(200).json({messsage: "hello it is working"}) ;
 }
 
