@@ -1,10 +1,11 @@
 const express = require('express')  ;
 const router = express.Router() ;
+const {
+      getHome,
+      postHome
+} = require('../controlers/controls') ;
 
-
-router.get('/', (req, res) =>{
-      console.log('hello everyone');
-      res.status(200).json({messsage: "hello it is working"}) ;
-}) ;
+router.get('/', getHome) ;
+router.post('/', postHome) ;
 
 module.exports = router
