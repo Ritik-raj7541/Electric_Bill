@@ -76,7 +76,7 @@ const postTransaction = asyncHandler(async (req, res) => {
     CurrentPaymentDate,
     CurrentCharges,
   } = req.body;
-  if (!Code || !ToDate || !CurrentReading ) {
+  if (!Code || !ToDate || !CurrentReading) {
     res.status(400);
     throw new Error(" fields are mandatory !");
   } else {
@@ -107,30 +107,44 @@ const postTransaction = asyncHandler(async (req, res) => {
     const printDateGen = date + "/" + month + "/" + year;
     const printPreviousBalance = docsInMaster[0].PrevBalance;
     const printCurrentCharges =
-      (CurrentReading - docsInMaster[0].LastReading) * docsInMaster[0].UnitRate + docsInMaster[0].MeterCharge;;
+      (CurrentReading - docsInMaster[0].LastReading) *
+        docsInMaster[0].UnitRate +
+      docsInMaster[0].MeterCharge;
     const printTotalDue =
-                 printPreviousBalance + printCurrentCharges - CurrentPayment ;
+      printPreviousBalance + printCurrentCharges - CurrentPayment;
     const printLastPayment = CurrentPayment;
     // given code is present in print
     const docsInPrint = await Print.find({ Code: req.body.Code });
     if (docsInPrint.length) {
       //then add or push the new transaction
-      
+
       const newData = {
         DateGen: printDateGen,
-        PreviousBalance:printPreviousBalance,
-        CurrentCharges:printCurrentCharges,
-        TotalDue:printTotalDue,
-        LastPayment:printLastPayment,
+        PreviousBalance: printPreviousBalance,
+        CurrentCharges: printCurrentCharges,
+        TotalDue: printTotalDue,
+        LastPayment: printLastPayment,
       };
-      const newPrint = await Print.findOneAndUpdate({Code:req.body.Code}, {$push:{Data:newData}})
-      const docsInPrintAfter = await Print.find({ Code: req.body.Code }); 
+      const newPrint = await Print.findOneAndUpdate(
+        { Code: req.body.Code },
+        { $push: { Data: newData } }
+      );
+      const docsInPrintAfter = await Print.find({ Code: req.body.Code });
+      const updatedMasterdocs = {
+        PrevBalance: printTotalDue,
+        LastReading: CurrentReading,
+        LastDate: printDateGen,
+      };
+      const updateMaster = await Master.findOneAndUpdate(
+        { Code: req.body.Code },
+        updatedMasterdocs
+      );
       res.status(200).json(docsInPrintAfter);
     } else {
       //set the new transaction with the new code
       const newData = {
         DateGen: printDateGen,
-        PrevBalance: printPreviousBalance,
+        PreviousBalance: printPreviousBalance,
         CurrentCharges: printCurrentCharges,
         TotalDue: printTotalDue,
         LastPayment: printLastPayment,
@@ -139,6 +153,15 @@ const postTransaction = asyncHandler(async (req, res) => {
         Code: printCode,
         Data: [newData],
       });
+      const updatedMasterdocs = {
+        PrevBalance: printTotalDue,
+        LastReading: CurrentReading,
+        LastDate: printDateGen,
+      };
+      const updateMaster = await Master.findOneAndUpdate(
+        { Code: req.body.Code },
+        updatedMasterdocs
+      );
       res.status(200).json(newPrint);
     }
   }

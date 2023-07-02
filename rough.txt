@@ -3,22 +3,23 @@ master value
 "Code":"123",
   "Name":"ritik",
   "Dept":"cse",
-  "PrevBalance":"1000",
+  "PrevBalance":"547570",
   "Location":"ranchi",
-  "LastReading":"5000",
-  "MeterCharge":"7",
-  "UnitRate":"8",
+  "LastReading":"28888",
+  "MeterCharge":"7.5",
+  "UnitRate":"7.25",
   "LastDate":"12may",
   "Allocation":"13may",
   "LastPaymentDate":"today"
 
 transaction value
 
-"Code":"123",
+{
+  "Code":"123",
   "ToDate":"13msy",
-  "CurrentReading":"2000",
-  "CurrentPayment":"1000",
-  "CurrentPaymentDate":"14july",
-  "CurrentCharges":"5000"
+  "CurrentReading":"29371",
+  "CurrentPayment":"150000",
+  "CurrentPaymentDate":"14july"
+}
 
 print value
