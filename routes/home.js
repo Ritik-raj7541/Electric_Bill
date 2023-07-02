@@ -1,11 +1,11 @@
 const express = require('express')  ;
 const router = express.Router() ;
 const {
-      getHome,
-      postHome
+      getMaster,
+      postMaster
 } = require('../controlers/controls') ;
 
-router.get('/', getHome) ;
-router.post('/', postHome) ;
+router.get('/', getMaster) ;
+router.post('/', postMaster) ;
 
 module.exports = router
