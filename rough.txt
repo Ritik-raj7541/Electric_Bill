@@ -1,0 +1,24 @@
+master value
+
+"Code":"123",
+  "Name":"ritik",
+  "Dept":"cse",
+  "PrevBalance":"1000",
+  "Location":"ranchi",
+  "LastReading":"5000",
+  "MeterCharge":"7",
+  "UnitRate":"8",
+  "LastDate":"12may",
+  "Allocation":"13may",
+  "LastPaymentDate":"today"
+
+transaction value
+
+"Code":"123",
+  "ToDate":"13msy",
+  "CurrentReading":"2000",
+  "CurrentPayment":"1000",
+  "CurrentPaymentDate":"14july",
+  "CurrentCharges":"5000"
+
+print value
