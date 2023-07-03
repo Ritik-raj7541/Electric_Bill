@@ -9,6 +9,7 @@ const port = 5000 ;
 
 app.use(express.json()) ;
 app.use('/api/home', require('./routes/home')) ;
+app.use('/api/user', require('./routes/user')) ;
 app.use(errorHandler) ;
 
 
