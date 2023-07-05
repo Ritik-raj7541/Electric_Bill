@@ -44,7 +44,7 @@ const loginUser = asyncHandler(async (req, res) => {
       //comparing both the password
       
       if(user &&(await bcrypt.compare(password, user.password))){
-            console.log('getting access');
+            // console.log('getting access');
             const accessToken = jwt.sign({
                   user:{
                         username: user.username,
